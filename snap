@@ -53,14 +53,15 @@ function createProject()
     git add . && git commit -m "Copied stubs"  --quiet
 
     echo "🔧 Run the migrations..."
-    php artisan reload:db
+    php artisan reload:db > /dev/null 2>&1
 
     echo "🔧 Setting up Valet.."
     cd public && valet link $NAME --secure --quiet > /dev/null 2>&1 && cd ../ && valet open $NAME
 
     echo "Launching the project in Visual Studio Code"
     code .
-    clear
+    echo "Open terminal for the project"
+    open -a iTerm .
     cd ../
     echo "🚀 Installation completed!"
 }
