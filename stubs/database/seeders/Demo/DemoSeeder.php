@@ -2,6 +2,7 @@
 
 namespace Database\Seeders\Demo;
 
+use App\Models\Team;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -28,6 +29,13 @@ class DemoSeeder extends Seeder
             ]);
 
             $user->assignRole(['user']);
+
+            $user->ownedTeams()->save(Team::forceCreate([
+                'uuid' => uuid(),
+                'user_id' => $user->id,
+                'name' => $datum->name . '\'s Team',
+                'personal_team' => true,
+            ]));
         }
     }
 }
