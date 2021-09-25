@@ -1,6 +1,6 @@
 <?php
 
-namespace Database\Seeders;
+namespace Database\Seeders\Dev;
 
 use App\Concerns\Seeds\SeedingProgressBar;
 use Illuminate\Database\Seeder;

@@ -7,7 +7,7 @@ function createProject()
 
     echo "🔧 Creating Laravel project named $NAME..."
     laravel new $NAME --jet --stack=livewire --teams --quiet > /dev/null 2>&1
-    cd $NAME && git init && git add . && git commit -m "Initial Commit"  --quiet
+    cd $NAME && git init --quiet && git add . && git commit -m "Initial Commit"  --quiet
 
     echo "🔧 Installing packages..."
     composer require yajra/laravel-datatables \
