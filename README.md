@@ -4,15 +4,23 @@ Snap allow developer to create scaffold Laravel project.
 
 ### Installation
 
-Clone this repository in your  user home directory.
+Clone this repository in your user home directory.
+
+```bash
+cd ~
+git clone https://github.com/nasrulhazim/snap 
+```
 
 Then make sure to load the script from `.zshrc` or `.profile`
 
 ```bash
-export ~/snap
+export SNAP_PATH=$HOME/snap
+export PATH=$PATH:$SNAP_PATH
 ```
 
 ### Usage
+
+I'm assuming you already installed the Composer, NPM, Yarn, and Git.
 
 Navigate to your common project directory and create new project with snap:
 
