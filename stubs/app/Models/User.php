@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Yadahan\AuthenticationLog\AuthenticationLogable;
+use Laravel\Jetstream\HasProfilePhoto;
+use Laravel\Jetstream\HasTeams;
 
 class User extends Authenticatable implements HasUuidContract, MustVerifyEmail
 {
@@ -18,6 +20,8 @@ class User extends Authenticatable implements HasUuidContract, MustVerifyEmail
     use HasUuid;
     use HasFactory;
     use Notifiable;
+    use HasProfilePhoto;
+    use HasTeams;
 
     /**
      * The attributes that are mass assignable.

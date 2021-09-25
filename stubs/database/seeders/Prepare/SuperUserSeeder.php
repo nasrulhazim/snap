@@ -27,6 +27,13 @@ class SuperUserSeeder extends Seeder
 
         $user->assignRole(Role::DEFAULT_ROLES);
 
+        $user->ownedTeams()->save(Team::forceCreate([
+            'uuid' => uuid(),
+            'user_id' => $user->id,
+            'name' => config('app.name'),
+            'personal_team' => true,
+        ]));
+
         event(new Registered($user));
     }
 }
