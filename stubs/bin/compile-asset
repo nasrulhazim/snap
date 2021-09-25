@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+if type "npm" > /dev/null; then
+	npm run prod >/dev/null
+	if [[ `git status --porcelain` >/dev/null ]]; then
+	  git add public/ resources/js resources/scss yarn.lock webpack.mix.js tailwind.config.js package-lock.json
+	  bin/commit ui "Compiled Frontend Assets for Production"
+	fi
+	MESSAGE="🎉 Successfully compiled frontend assets for production"
+else  
+	MESSAGE="☠️ You need to install NPM in order to install frontend dependencies." 
+fi
+
+echo $MESSAGE

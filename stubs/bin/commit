@@ -1,0 +1,92 @@
+#!/usr/bin/env bash
+
+if ! type "git" > /dev/null; then
+  echo "☠️ You need git to run this command" 
+  return
+fi
+
+
+if [[ ! $2 ]]; then
+	echo "☠️ You need git to provide commit message" 
+	return
+fi
+
+## First argument is type, second is the message
+EMOJI_TYPE=$1
+MESSAGE=$2
+
+case $EMOJI_TYPE in
+
+  bug)
+    EMOJI=🐛
+    ;;
+
+  config)
+    EMOJI=🛠️
+    ;;
+
+  wip)
+    EMOJI=🚧
+    ;;
+
+  refactor)
+    EMOJI=♻️
+    ;;
+
+  feature)
+    EMOJI=✨
+    ;;
+
+  ui)
+    EMOJI=💄
+    ;;
+
+  codestyle)
+    EMOJI=🎨
+    ;;
+    
+  fix)
+    EMOJI=🔧
+    ;;
+
+  dependencies)
+    EMOJI=⬆️
+    ;;
+
+  locale)
+    EMOJI=🌐
+    ;;
+
+  remove)
+    EMOJI=🗑️
+    ;;
+
+  cleanup)
+    EMOJI=🧹
+    ;;
+
+  storage)
+    EMOJI=🗄️
+    ;;
+
+  release)
+    EMOJI=🚀
+    ;;
+
+  cicd)
+    EMOJI=🤖
+    ;;
+
+  terminal)
+    EMOJI=💻
+    ;;
+
+  *)
+    EMOJI=😊
+    EMOJI_TYPE="changed"
+    ;;
+esac
+
+git commit -m "${EMOJI} ${MESSAGE}" >/dev/null
+
+echo "🎉 Your ${EMOJI_TYPE} codes commited!"

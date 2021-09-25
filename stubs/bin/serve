@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if ! type "valet" > /dev/null; then
+  echo "☠️ You need valet to run this command" 
+  return
+fi
+
+if [[ ! $1 ]]; then
+	DOMAIN="${PWD##*/}"
+else 
+	DOMAIN="$1"
+fi
+
+echo "🎉 Setting up ${DOMAIN} domain"
+valet unlink $DOMAIN --quiet --no-ansi --no-interaction >/dev/null
+cd public 
+valet link $DOMAIN --secure --quiet --no-ansi --no-interaction >/dev/null
+cd ..
+echo "🎉 Setting up ${DOMAIN} completed"
+echo "🎉 Open up ${DOMAIN}"
+valet open $DOMAIN
+echo "🎉 Successfully setup ${DOMAIN} domain"

@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+CSFIX="php-cs-fixer"
+
+if [ ! -f "$CSFIX" ]; then
+	if ! type "php-cs-fixer" > /dev/null; then
+	  clear
+	  echo "☠️ You need PHP CS Fixer to run this command." 
+	  return
+	fi    
+fi
+
+$CSFIX fix
+
+if [[ `git status --porcelain` ]]; then
+  git add .
+  bin/commit codestyle "Apply PHP CS Fixer"
+  MESSAGE="🎉 Successfully complied with PSR-2"
+else
+  MESSAGE="🎉 You already complied with PSR-2"
+fi
+
+echo $MESSAGE

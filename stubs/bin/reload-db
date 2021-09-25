@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Create SQLite Database
+touch database/database.sqlite
+
+bin/clear-cache
+
+echo "🎉 Creating tables"
+php artisan reload:db --quiet
+php artisan seed:pre --quiet
+# echo "🎉 Installing Laravel Passport"
+# php artisan passport:install --force --quiet
+
+if [[ $1 ]]; then
+	echo "🎉 Seeding development data"
+	php artisan seed:dev --quiet
+fi

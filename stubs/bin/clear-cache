@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+echo "🎉 Clearing caches"
+
+rm bootstrap/cache/*.php
+
+php artisan reload:cache --quiet
+
+composer dumpautoload -o --quiet --no-ansi --no-interaction

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+if [ $# -eq 0 ]
+  then
+  	clear
+	echo "☠️ Please supply the date. eg. 2019-01-01"
+    return
+fi
+
+SINCE=$1
+UNTIL=$2
+VERSION=$3
+
+if [ -z "$UNTIL" ]
+	then
+		UNTIL=$(date +'%Y-%m-%d')
+fi
+
+if [ -z "$VERSION" ]
+	then
+		VERSION=$SINCE-$UNTIL
+fi
+
+mkdir -p "storage/change-log"
+
+git log --since=$SINCE --until=$UNTIL --no-merges --date=short --pretty=format:'%ad,%s,%an,%h' > storage/change-log/CHANGELOG-$VERSION.csv
+
+clear
+echo "🎉 Change log from ${SINCE} unitl ${UNTIL} generated at storage/change-log/CHANGELOG-$VERSION.csv"
+return

@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+clear
+echo "🏗️  Building..."
+
+# Check if there is keyword serve | dev
+# By default both are false
+
+SERVE=
+SEED_DEV=
+
+for var in "$@"
+do
+    if [[ $var = "serve" ]]; then
+    	SERVE=true
+    fi
+    if [[ $var = "dev" ]]; then
+    	SEED_DEV=true
+    fi
+done
+
+VENDOR=vendor/
+if [ ! -d "$VENDOR" ]; then
+    composer install --quiet --no-ansi --no-interaction
+	echo "🎉 Installed application dependencies"
+fi
+
+ENV=.env
+if [ ! -f "$ENV" ]; then
+    cp .env.example .env
+fi
+
+php artisan key:generate --quiet
+echo "🎉 Application key generated"
+
+if [[ $SEED_DEV ]]; then
+	bin/reload-db $1
+else
+	bin/reload-db
+fi
+
+NODE_MODULES=node_modules/
+if [ ! -d "$NODE_MODULES" ]; then
+	if type "yarn" > /dev/null; then
+		yarn install --no-progress --non-interactive --silent > /dev/null
+		echo "🎉 Installed frontend assets dependencies"
+	else  
+	  	echo "🎉 You need to install Yarn in order to install frontend dependencies"
+	fi
+fi
+
+if [[ $SERVE ]]; then
+	# MacOS with Valet Installed Only
+	# Automagically register domain 
+	bin/serve
+fi
+
+php artisan storage:link --quiet
+echo "🎉 Storage linked"
+
+echo "🏢 Building Complete!"

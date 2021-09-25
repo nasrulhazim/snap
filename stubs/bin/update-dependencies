@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if type "composer" > /dev/null; then
+	composer update --quiet --no-ansi --no-interaction >/dev/null
+	if [[ `git status --porcelain` ]]; then
+	  git add composer.json composer.lock
+	  bin/commit dependencies "Dependencies updated"
+	else
+	  echo "🎉 You have successfully update the dependencies!"
+	fi
+else  
+	echo "☠️ You need to install composer in order to update dependencies" 
+fi
+
+if type "yarn" > /dev/null; then
+	yarn upgrade >/dev/null
+	bin/compile-asset
+else  
+	echo "☠️ You need to install Yarn in order to upgrade frontend dependencies" 
+fi
+
+clear
