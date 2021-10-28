@@ -6,11 +6,18 @@ function createProject()
     mysql -h 'localhost' -u root ${ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
 
     echo "🔧 Creating Laravel project named $NAME..."
-    laravel new $NAME --jet --stack=livewire --teams --quiet > /dev/null 2>&1
-    git add . && git commit -m "Initial Commit"  --quiet
+    laravel new $NAME --branch=main --jet --stack=livewire --quiet > /dev/null 2>&1
+
+    echo "🔧 Navigating to project directory..."
+    cd $NAME
+
+    echo "🔧 Disable advice.addIgnoredFile..."
+    git config advice.addIgnoredFile false
+
+    echo "🔧 Initial Commit..."
+    git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
 
     echo "🔧 Installing packages..."
-    cd $NAME
     composer require \
     rappasoft/laravel-livewire-tables \
     blade-ui-kit/blade-icons \
@@ -28,7 +35,7 @@ function createProject()
     spatie/laravel-permission \
     yadahan/laravel-authentication-log \
     --quiet --no-ansi --no-interaction
-    git add . && git commit -m "Added common packages"  --quiet
+    git add . > /dev/null 2>&1 && git commit -m "Added common packages"  --quiet
 
     echo "🔧 Installing development packages..."
     composer require \
@@ -36,16 +43,17 @@ function createProject()
     nunomaduro/larastan \
     spatie/laravel-ray \
     --quiet --no-ansi --no-interaction --dev
-    git add . && git commit -m "Added development packages"  --quiet
+    git add . > /dev/null 2>&1 && git commit -m "Added development packages"  --quiet
 
     echo "🔧 Publishing packages config and assets..."
     php artisan vendor:publish --all --force --quiet
-    git add . && git commit -m "Publishing packages config and assets"  --quiet
+    git add . > /dev/null 2>&1 && git commit -m "Publishing packages config and assets"  --quiet
 
     echo "🔧 Setting up front-end assets..."
     yarn install --silent > /dev/null 2>&1
+    cp ../stubs/webpack.mix.js .
     npm run prod > /dev/null 2>&1
-    git add . && git commit -m "Setting up front-end assets"  --quiet
+    git add . > /dev/null 2>&1 && git commit -m "Setting up front-end assets"  --quiet
 
     echo "🔧 Copying stubs..."
     # Need to copy the stubs from snap/stubs absolute directory to  project directory
@@ -54,14 +62,14 @@ function createProject()
     cp -R ../stubs/bin .
     cp -R ../stubs/config .
     cp -R ../stubs/database .
+    cp -R ../stubs/resources .
     cp -R ../stubs/routes .
     cp -R ../stubs/storage .
     cp -R ../stubs/support .
     cp -R ../stubs/tinker .
     cp ../stubs/.php_cs .
     cp ../stubs/phpstan.dist .
-    cp ../stubs/webpack.mix.js .
-    git add . -f && git commit -m "Copied stubs"  --quiet
+    git add . > /dev/null 2>&1 && git commit -m "Copied stubs"  --quiet
 
     echo "🔧 Run the migrations..."
     php artisan reload:db

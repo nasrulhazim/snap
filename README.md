@@ -4,7 +4,13 @@ Snap allow developer to create scaffold Laravel project.
 
 ### Installation
 
-Clone this repository in your  user home directory.
+Ensured to install MailHog and set your `/etc/hosts` for MailHog:
+
+```plaintext
+127.0.0.1 mailhog
+```
+
+Clone this repository in your user home directory.
 
 Then make sure to load the script from `.zshrc` or `.profile`
 
@@ -32,6 +38,30 @@ This will essentially create a new project with the following packages installed
 - spatie/laravel-permission
 - yadahan/laravel-authentication-log
 - barryvdh/laravel-debugbar
+
+### Configuration
+
+Additional manual configuration are required at the moment.
+
+#### Configure `helpers
+
+Open up `composer.json`, add the following in `autoload` section:
+
+```json
+...
+"files": [
+    "support/helpers.php"
+]...
+```
+
+#### Configure `.env`
+
+You need to at least configure the email configuration:
+
+```env
+MAIL_FROM_ADDRESS="noreplay@your-domain.com"
+MAIL_FROM_NAME="${APP_NAME}"
+```
 
 ## License
 

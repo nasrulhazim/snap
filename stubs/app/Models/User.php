@@ -10,12 +10,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
 use Yadahan\AuthenticationLog\AuthenticationLogable;
+use Laravel\Jetstream\HasProfilePhoto;
 
 class User extends Authenticatable implements HasUuidContract, MustVerifyEmail
 {
     use AuthenticationLogable;
     use HasRoles;
     use HasUuid;
+    use HasProfilePhoto;
     use HasFactory;
     use Notifiable;
 
