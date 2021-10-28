@@ -20,7 +20,6 @@ class User extends Authenticatable implements HasUuidContract, MustVerifyEmail
     use HasProfilePhoto;
     use HasFactory;
     use Notifiable;
-    use HasProfilePhoto;
 
     /**
      * The attributes that are mass assignable.
