@@ -4,6 +4,7 @@ namespace Database\Seeders\Prepare;
 
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Team;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;

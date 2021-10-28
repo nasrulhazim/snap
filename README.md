@@ -12,13 +12,20 @@ Ensured to install MailHog and set your `/etc/hosts` for MailHog:
 
 Clone this repository in your user home directory.
 
+```bash
+git clone https://github.com/nasrulhazim/snap 
+```
+
 Then make sure to load the script from `.zshrc` or `.profile`
 
 ```bash
-export ~/snap
+export SNAP_PATH=$HOME/snap
+export PATH=$PATH:$SNAP_PATH
 ```
 
 ### Usage
+
+I'm assuming you already installed the Composer, NPM, Yarn, and Git.
 
 Navigate to your common project directory and create new project with snap:
 
@@ -65,4 +72,4 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The snap is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
