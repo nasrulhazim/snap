@@ -59,20 +59,21 @@ function createProject()
     cp -R ../stubs/support .
     cp -R ../stubs/tinker .
     cp ../stubs/.php_cs .
-    cp ../stubs/.phpstan.dist .
+    cp ../stubs/phpstan.dist .
     cp ../stubs/webpack.mix.js .
-    git add . && git commit -m "Copied stubs"  --quiet
+    git add . -f && git commit -m "Copied stubs"  --quiet
 
     echo "🔧 Run the migrations..."
     php artisan reload:db
 
-    echo "🔧 Setting up Valet.."
-    cd public && valet link $NAME --secure --quiet > /dev/null 2>&1 && cd ../ && valet open $NAME
-
     echo "Launching the project in Visual Studio Code"
     code .
+    
     clear
-    cd ../
+
+    echo "Serve the project"
+    php artisan serve
+
     echo "🚀 Installation completed!"
 }
 
