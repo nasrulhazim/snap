@@ -17,12 +17,17 @@ function createProject()
     echo "🔧 Initial Commit..."
     git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
 
+    echo "🔧 Updating MAIL configuration..."
+    cp .env .env.example
+    sed 's/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=noreply@app.com/g' .env.example > .env
+
     echo "🔧 Updating .env.example configuration..."
     cp .env .env.example
     git add . > /dev/null 2>&1 && git commit -m "Update .env.example"  --quiet
 
-    echo "🔧 Updating MAIL configuration..."
-    sed 's/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=noreply@app.com/g' .env.example > .env
+    echo "🔧 Updating README.md..."
+    sed "s/YOUR_APP/${NAME}/g" $SNAP_PATH/stubs/README.md > README.md
+    git add . > /dev/null 2>&1 && git commit -m "Update README.md"  --quiet
 
     echo "🔧 Installing packages..."
     composer require \
@@ -49,6 +54,7 @@ function createProject()
     barryvdh/laravel-debugbar  \
     nunomaduro/larastan \
     spatie/laravel-ray \
+    friendsofphp/php-cs-fixer \
     --quiet --no-ansi --no-interaction --dev
     git add . > /dev/null 2>&1 && git commit -m "Added development packages"  --quiet
 
@@ -74,7 +80,7 @@ function createProject()
     cp -R $SNAP_PATH/stubs/storage .
     cp -R $SNAP_PATH/stubs/support .
     cp -R $SNAP_PATH/stubs/tinker .
-    cp $SNAP_PATH/stubs/.php_cs .
+    cp $SNAP_PATH/stubs/.php-cs-fixer.php .
     cp $SNAP_PATH/stubs/phpstan.dist .
     git add . > /dev/null 2>&1 && git commit -m "Copied stubs"  --quiet
 

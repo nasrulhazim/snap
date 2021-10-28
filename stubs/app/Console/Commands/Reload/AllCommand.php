@@ -12,6 +12,7 @@ class AllCommand extends Command
      * @var string
      */
     protected $signature = 'reload:all
+                                {--m|demo : Seed demo data}
                                 {--d|dev : Seed development data}';
 
     /**
@@ -41,6 +42,10 @@ class AllCommand extends Command
 
         if ($this->option('dev')) {
             $this->call('seed:dev');
+        }
+
+        if ($this->option('demo')) {
+            $this->call('seed:demo');
         }
 
         $this->info('Successfully reload caches and database.');
