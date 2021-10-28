@@ -11,8 +11,11 @@ function createProject()
 
     echo "🔧 Installing packages..."
     cd $NAME
-    composer require yajra/laravel-datatables \
+    composer require \
+    rappasoft/laravel-livewire-tables \
+    blade-ui-kit/blade-icons \
     rap2hpoutre/laravel-log-viewer \
+    diglactic/laravel-breadcrumbs \
     predis/predis \
     cleaniquecoders/laravel-observers \
     cleaniquecoders/laravel-uuid \
@@ -28,7 +31,10 @@ function createProject()
     git add . && git commit -m "Added common packages"  --quiet
 
     echo "🔧 Installing development packages..."
-    composer require barryvdh/laravel-debugbar  \
+    composer require \
+    barryvdh/laravel-debugbar  \
+    nunomaduro/larastan \
+    spatie/laravel-ray \
     --quiet --no-ansi --no-interaction --dev
     git add . && git commit -m "Added development packages"  --quiet
 
@@ -43,6 +49,7 @@ function createProject()
 
     echo "🔧 Copying stubs..."
     # Need to copy the stubs from snap/stubs absolute directory to  project directory
+    cp -R ../stubs/.github .
     cp -R ../stubs/app .
     cp -R ../stubs/bin .
     cp -R ../stubs/config .
@@ -51,6 +58,9 @@ function createProject()
     cp -R ../stubs/storage .
     cp -R ../stubs/support .
     cp -R ../stubs/tinker .
+    cp ../stubs/.php_cs .
+    cp ../stubs/.phpstan.dist .
+    cp ../stubs/webpack.mix.js .
     git add . && git commit -m "Copied stubs"  --quiet
 
     echo "🔧 Run the migrations..."

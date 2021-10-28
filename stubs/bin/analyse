@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+DATETIME=$(date +"%Y-%m-%d-%H-%M-%S")
+
+vendor/bin/phpstan analyse -c phpstan.dist > storage/analysis/phpstan-${DATETIME}.output
