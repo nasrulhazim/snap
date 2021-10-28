@@ -11,14 +11,18 @@ function createProject()
     echo "🔧 Navigating to project directory..."
     cd $NAME
 
-    echo "Updating MAIL configuration..."
-    sed 's/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=noreply@app.com/g' .env > .env
-
     echo "🔧 Disable advice.addIgnoredFile..."
     git config advice.addIgnoredFile false
 
     echo "🔧 Initial Commit..."
     git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
+
+    echo "🔧 Updating .env.example configuration..."
+    cp .env .env.example
+    git add . > /dev/null 2>&1 && git commit -m "Update .env.example"  --quiet
+
+    echo "🔧 Updating MAIL configuration..."
+    sed 's/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=noreply@app.com/g' .env.example > .env
 
     echo "🔧 Installing packages..."
     composer require \
