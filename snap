@@ -14,9 +14,6 @@ function createProject()
     echo "🔧 Initial Commit..."
     git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
 
-    echo "🔧 Disable advice.addIgnoredFile..."
-    git config advice.addIgnoredFile false
-
     echo "🔧 Updating MAIL configuration..."
     cp .env .env.example
     sed 's/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=noreply@app.com/g' .env.example > .env
