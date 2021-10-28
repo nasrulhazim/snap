@@ -61,15 +61,6 @@ Open up `composer.json`, add the following in `autoload` section:
 ]...
 ```
 
-#### Configure `.env`
-
-You need to at least configure the email configuration:
-
-```env
-MAIL_FROM_ADDRESS="noreplay@your-domain.com"
-MAIL_FROM_NAME="${APP_NAME}"
-```
-
 ## License
 
 The snap is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
