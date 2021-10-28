@@ -81,6 +81,9 @@ function createProject()
     cp $SNAP_PATH/stubs/phpstan.dist .
     git add . > /dev/null 2>&1 && git commit -m "Copied stubs"  --quiet
 
+    echo "🔧 Creating develop branch..."
+    git checkout -b develop 
+
     echo "🔧 Run the migrations..."
     php artisan reload:db > /dev/null 2>&1
 
