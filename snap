@@ -11,11 +11,11 @@ function createProject()
     echo "🔧 Navigating to project directory..."
     cd $NAME
 
-    echo "🔧 Disable advice.addIgnoredFile..."
-    git config advice.addIgnoredFile false
-
     echo "🔧 Initial Commit..."
     git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
+
+    echo "🔧 Disable advice.addIgnoredFile..."
+    git config advice.addIgnoredFile false
 
     echo "🔧 Updating MAIL configuration..."
     cp .env .env.example
