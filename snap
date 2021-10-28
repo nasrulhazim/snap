@@ -12,7 +12,7 @@ function createProject()
     cd $NAME
 
     echo "🔧 Initial Commit..."
-    git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
+    git init > /dev/null 2>&1 && git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
 
     echo "🔧 Updating MAIL configuration..."
     cp .env .env.example
