@@ -1,23 +1,29 @@
 #!/usr/bin/env bash
 
-CSFIX="php-cs-fixer"
+export PHP_CS_FIXER_IGNORE_ENV=1
 
-if [ ! -f "$CSFIX" ]; then
-	if ! type "php-cs-fixer" > /dev/null; then
-	  clear
-	  echo "☠️ You need PHP CS Fixer to run this command." 
-	  return
-	fi    
+PHP_CS_FIXER="vendor/bin/php-cs-fixer"
+HAS_PHP_CS_FIXER=false
+
+if [ -x $PHP_CS_FIXER ]; then
+    HAS_PHP_CS_FIXER=true
 fi
 
-$CSFIX fix
-
-if [[ `git status --porcelain` ]]; then
-  git add .
-  bin/commit codestyle "Apply PHP CS Fixer"
-  MESSAGE="🎉 Successfully complied with PSR-2"
+if $HAS_PHP_CS_FIXER; then
+    FILES=`git status --porcelain | grep -E '^[AM] +(app|config|database|routes|support|tests|tinker).*\.php$' | cut -c 4- | tr '\n' ' '`
+    if [ -z "$FILES" ]
+	then
+		  echo "No php files found in commit."
+	else
+		  echo ${FILES}
+		  $PHP_CS_FIXER fix --config=.php_cs.dist --verbose ${FILES}
+		  git add ${FILES}
+	fi
 else
-  MESSAGE="🎉 You already complied with PSR-2"
+    echo ""
+    echo "Please install php-cs-fixer, e.g.:"
+    echo ""
+    echo "  composer require --dev fabpot/php-cs-fixer:dev-master"
+    echo ""
+    exit 1
 fi
-
-echo $MESSAGE
