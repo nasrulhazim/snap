@@ -1,32 +1,41 @@
 #!/usr/bin/env bash
+function commit()
+{
+    git add . > /dev/null 2>&1 && git commit -m "$1" --quiet
+}
+
+function display()
+{
+    echo "$1"
+}
 
 function createProject()
 {
-    echo "🔧 Creating database..."
+    display "Creating database..."
     mysql -h 'localhost' -u root ${ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
 
-    echo "🔧 Creating Laravel project named $NAME..."
+    display "Creating Laravel project named $NAME..."
     laravel new $NAME --branch=main --no-ansi --quiet > /dev/null 2>&1
 
-    echo "🔧 Navigating to project directory..."
+    display "Navigating to project directory..."
     cd $NAME
 
-    echo "🔧 Initial Commit..."
-    git init > /dev/null 2>&1 && git add . > /dev/null 2>&1 && git commit -m "Initial Commit"  --quiet
+    display "Initial Commit..."
+    git init > /dev/null 2>&1 && commit "Initial Commit"
 
-    echo "🔧 Updating MAIL configuration..."
+    display "Updating MAIL configuration..."
     cp .env .env.example
     sed 's/MAIL_FROM_ADDRESS=null/MAIL_FROM_ADDRESS=noreply@app.com/g' .env.example > .env
 
-    echo "🔧 Updating .env.example configuration..."
+    display "Updating .env.example configuration..."
     cp .env .env.example
-    git add . > /dev/null 2>&1 && git commit -m "Update .env.example"  --quiet
+    commit "Update .env.example"
 
-    echo "🔧 Updating README.md..."
+    display "Updating README.md..."
     sed "s/YOUR_APP/${NAME}/g" $SNAP_PATH/stubs/README.md > README.md
-    git add . > /dev/null 2>&1 && git commit -m "Update README.md"  --quiet
+    commit "Update README.md"
 
-    echo "🔧 Installing packages..."
+    display "Installing packages..."
     composer require \
     blade-ui-kit/blade-icons \
     cleaniquecoders/laravel-observers \
@@ -46,18 +55,18 @@ function createProject()
     predis/predis \
     yadahan/laravel-authentication-log \
     --quiet --no-ansi --no-interaction
-    git add . > /dev/null 2>&1 && git commit -m "Added common packages"  --quiet
+    commit "Added common packages"
 
-    echo "🔧 Installing development packages..."
+    display "Installing development packages..."
     composer require \
     barryvdh/laravel-debugbar  \
     nunomaduro/larastan \
     spatie/laravel-ray \
     friendsofphp/php-cs-fixer \
     --quiet --no-ansi --no-interaction --dev
-    git add . > /dev/null 2>&1 && git commit -m "Added development packages"  --quiet
+    commit "Added development packages"
 
-    echo "🔧 Installing frontend packages..."
+    display "Installing frontend packages..."
     yarn add tailwindcss \
     alpinejs \
     @tailwindcss/aspect-ratio \
@@ -71,42 +80,42 @@ function createProject()
     sass \
     sass-loader \
     --dev --silent > /dev/null 2>&1
-    git add . > /dev/null 2>&1 && git commit -m "Added frontend packages"  --quiet
+    commit "Added frontend packages"
 
-    ## No need, since we already getting the config & assets from stubs
-    # echo "🔧 Publishing packages config and assets..."
-    # php artisan vendor:publish --all --force --quiet
-    # git add . > /dev/null 2>&1 && git commit -m "Publishing packages config and assets"  --quiet
-
-    echo "🔧 Copying stubs..."
+    display "Copying stubs..."
     # Need to copy the stubs from snap/stubs absolute directory to  project directory
     cp -R $SNAP_PATH/stubs/ .
-    git add . > /dev/null 2>&1 && git commit -m "Copied stubs"  --quiet
+    commit "Copied stubs"
 
-    echo "🔧 Compiling frontend assets..."
+    display "Setting up helpers..."
+    php $SNAP_PATH/configure.php composer.json
+    commit "Configured helper"
+
+    display "Compiling frontend assets..."
     npm run prod > /dev/null 2>&1
-    git add . > /dev/null 2>&1 && git commit -m "Compiled front-end assets"  --quiet
+    commit "Compiled front-end assets"
 
-    echo "🔧 Create notifications & queue table..."
+    display "Create notifications & queue table..."
     php artisan notifications:table
     php artisan queue:table
-    git add . > /dev/null 2>&1 && git commit -m "Created notifications and queue table"  --quiet
+    commit "Created notifications and queue table"
 
-    echo "🔧 Creating develop branch..."
+    display "Creating develop branch..."
     git checkout -b develop 
 
-    echo "🔧 Run the migrations..."
+    display "Run the migrations..."
     php artisan reload:all --dev > /dev/null 2>&1
 
-    echo "🚀 Installation completed!"
-    echo ""
+    display ""
+    display "🚀 Installation completed!"
+    display ""
 
-    echo "Launching the project in Visual Studio Code"
+    display "Launching the project in Visual Studio Code"
     code .
     
     clear
 
-    echo "Serve the project"
+    display "Serve the project"
     php artisan serve
 }
 
