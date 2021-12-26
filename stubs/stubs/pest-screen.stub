@@ -1,0 +1,50 @@
+<?php
+
+/** 
+ * This is a template to start working on testing screens.
+ * You may need to add more logics, setup in order make 
+ * this test running smoothly. Reference: https://pestphp.com/
+ **/
+test('can see {{ label }} listing', function () {
+    $this->assertTrue(true);
+    // you need to login
+
+    // $response = $this->get(route('{{ route_prefix }}.index'));
+
+    // $response->assertStatus(200);
+});
+
+test('can see {{ label }} create form', function () {
+    $this->assertTrue(true);
+    // you need to login
+    
+    // $response = $this->get(route('{{ route_prefix }}.create'));
+
+    // $response->assertStatus(200);
+
+    // you may want to submit form to test it out the functionality
+});
+
+test('can see {{ label }} edit form', function () {
+    $this->assertTrue(true);
+    // you need to login
+    // you need to define your $model
+     
+    // $response = $this->get(route('{{ route_prefix }}.edit', $model));
+ 
+    // $response->assertStatus(200);
+
+    // you may want to submit form to test it out the functionality
+});
+
+test('can see {{ label }} details', function () {
+    $this->assertTrue(true);
+    // you need to login
+    // you need to define your $model
+ 
+    // $response = $this->get(route('{{ route_prefix }}.show', $model));
+ 
+    // $response->assertStatus(200);
+
+    // you may want to verify the details displayed
+});

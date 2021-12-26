@@ -1,0 +1,13 @@
+<?php
+
+namespace {{ namespace }};
+
+
+use Spatie\Enum\Laravel\Enum;
+
+/**
+ * @method static self draft()
+ */
+class {{ class }} extends Enum
+{
+}

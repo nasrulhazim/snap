@@ -1,0 +1,19 @@
+<x-app-layout>
+    <x-slot name="header">
+        <div class="md:flex md:items-center space-y-4 md:space-y-0 md:justify-between">
+            <x-header title="Record List" />
+            <div class="flex items-end">
+                <x-button variant="primary" href="#">
+                    <x-icon name="square-plus" class="w-6 h-6 -ml-2"></x-icon>
+                    <span>{{ __('Create New Record') }}</span>
+                </x-button>
+            </div>
+        </div>
+    </x-slot>
+
+    <div class="max-w mx-auto">
+        <x-panel>
+
+        </x-panel>
+    </div>
+</x-app-layout>
