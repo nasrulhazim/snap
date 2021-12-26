@@ -2,7 +2,6 @@
 
 namespace Database\Seeders\Demo;
 
-use App\Models\Team;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,7 +23,7 @@ class DemoSeeder extends Seeder
                 'email' => $datum->email,
             ], [
                 'name' => $datum->name,
-                'password' => Hash::make('StrongPassword1234^|'),
+                'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]);
 

@@ -6,7 +6,7 @@ function createProject()
     mysql -h 'localhost' -u root ${ROOT_PASSWORD} -e "CREATE DATABASE IF NOT EXISTS ${DB_NAME};"
 
     echo "🔧 Creating Laravel project named $NAME..."
-    laravel new $NAME --branch=main --jet --stack=livewire --quiet > /dev/null 2>&1
+    laravel new $NAME --branch=main --no-ansi --quiet > /dev/null 2>&1
 
     echo "🔧 Navigating to project directory..."
     cd $NAME
@@ -28,20 +28,22 @@ function createProject()
 
     echo "🔧 Installing packages..."
     composer require \
-    rappasoft/laravel-livewire-tables \
     blade-ui-kit/blade-icons \
-    rap2hpoutre/laravel-log-viewer \
-    diglactic/laravel-breadcrumbs \
-    predis/predis \
     cleaniquecoders/laravel-observers \
     cleaniquecoders/laravel-uuid \
+    diglactic/laravel-breadcrumbs \
     lab404/laravel-impersonate \
+    laravel/jetstream \
     livewire/livewire \
     owen-it/laravel-auditing \
-    spatie/laravel-activitylog \
+    rappasoft/laravel-livewire-tables \
+    spatie/enum \
+    spatie/laravel-enum \
     spatie/laravel-medialibrary \
     spatie/laravel-tags \
     spatie/laravel-permission \
+    rap2hpoutre/laravel-log-viewer \
+    predis/predis \
     yadahan/laravel-authentication-log \
     --quiet --no-ansi --no-interaction
     git add . > /dev/null 2>&1 && git commit -m "Added common packages"  --quiet
@@ -55,42 +57,46 @@ function createProject()
     --quiet --no-ansi --no-interaction --dev
     git add . > /dev/null 2>&1 && git commit -m "Added development packages"  --quiet
 
-    echo "🔧 Publishing packages config and assets..."
-    php artisan vendor:publish --all --force --quiet
-    git add . > /dev/null 2>&1 && git commit -m "Publishing packages config and assets"  --quiet
+    echo "🔧 Installing frontend packages..."
+    yarn add tailwindcss \
+    alpinejs \
+    @tailwindcss/aspect-ratio \
+    @tailwindcss/forms \
+    @tailwindcss/line-clamp \
+    @tailwindcss/typography \
+    flatpickr \
+    jquery \
+    select2 \
+    postcss-import \
+    sass \
+    sass-loader \
+    --dev --silent > /dev/null 2>&1
+    git add . > /dev/null 2>&1 && git commit -m "Added frontend packages"  --quiet
 
-    echo "🔧 Setting up front-end assets..."
-    yarn install --silent > /dev/null 2>&1
-    cp $SNAP_PATH/stubs/webpack.mix.js .
-    npm run prod > /dev/null 2>&1
-    git add . > /dev/null 2>&1 && git commit -m "Setting up front-end assets"  --quiet
+    ## No need, since we already getting the config & assets from stubs
+    # echo "🔧 Publishing packages config and assets..."
+    # php artisan vendor:publish --all --force --quiet
+    # git add . > /dev/null 2>&1 && git commit -m "Publishing packages config and assets"  --quiet
 
     echo "🔧 Copying stubs..."
     # Need to copy the stubs from snap/stubs absolute directory to  project directory
-    cp -R $SNAP_PATH/stubs/.github .
-    cp -R $SNAP_PATH/stubs/app .
-    cp -R $SNAP_PATH/stubs/bin .
-    cp -R $SNAP_PATH/stubs/config .
-    cp -R $SNAP_PATH/stubs/database .
-    cp -R $SNAP_PATH/stubs/resources .
-    cp -R $SNAP_PATH/stubs/routes .
-    cp -R $SNAP_PATH/stubs/storage .
-    cp -R $SNAP_PATH/stubs/support .
-    cp -R $SNAP_PATH/stubs/tinker .
-    cp $SNAP_PATH/stubs/.php-cs-fixer.php .
-    cp $SNAP_PATH/stubs/phpstan.dist .
+    cp -R $SNAP_PATH/stubs/ .
     git add . > /dev/null 2>&1 && git commit -m "Copied stubs"  --quiet
+
+    echo "🔧 Compiling frontend assets..."
+    npm run prod > /dev/null 2>&1
+    git add . > /dev/null 2>&1 && git commit -m "Compiled front-end assets"  --quiet
 
     echo "🔧 Create notifications & queue table..."
     php artisan notifications:table
     php artisan queue:table
-    git add . > /dev/null 2>&1 && git commit -m "Created notifiactions and queue table"  --quiet
+    git add . > /dev/null 2>&1 && git commit -m "Created notifications and queue table"  --quiet
 
     echo "🔧 Creating develop branch..."
     git checkout -b develop 
 
     echo "🔧 Run the migrations..."
-    php artisan reload:db > /dev/null 2>&1
+    php artisan reload:all --dev > /dev/null 2>&1
 
     echo "🚀 Installation completed!"
     echo ""

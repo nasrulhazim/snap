@@ -10,7 +10,7 @@
         <x-form.label name="{{ $name }}">{{ $label }}</x-form.label>
     @endif
 
-    <div class="md:w-4/6">
+    <div class="{{ ($label ?? false) ? 'md:w-4/6' : 'w-full' }}">
         <select
             name="{{ $name }}"
             {!! $attributes->merge(['class' => $class]) !!}

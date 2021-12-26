@@ -2,7 +2,8 @@
 
 namespace App\Concerns;
 
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\InteractsWithMedia;
+
 use Spatie\MediaLibrary\Models\Media;
 
 /**
@@ -10,7 +11,7 @@ use Spatie\MediaLibrary\Models\Media;
  */
 trait HasMediaExtended
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
 
     /**
      * Get the last media item of a media collection.

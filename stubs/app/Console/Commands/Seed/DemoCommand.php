@@ -37,7 +37,7 @@ class DemoCommand extends Command
     {
         $this->call('db:seed', [
             '--class' => '\Database\Seeders\DemoSeeder',
-            '--quiet' => true
+            '--quiet' => true,
         ]);
     }
 }

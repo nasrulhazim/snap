@@ -13,8 +13,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create()->each(function ($user) {
-            $user->assignRole('user');
+        \App\Models\User::factory(600)->create()->each(function ($user) {
+            $user->assignRole($this->getRole());
         });
+    }
+
+    private function getRole()
+    {
+        return \App\Models\Role::DEFAULT_ROLES[
+            rand(0, count(\App\Models\Role::DEFAULT_ROLES) - 1)
+        ];
     }
 }

@@ -1,27 +1,27 @@
 <?php
 
-if (! function_exists('notificationDrivers')) {
+if (! function_exists('notification_drivers')) {
     /**
      * Get Default Notification Drivers.
      */
-    function notificationDrivers()
+    function notification_drivers()
     {
         return config('notification.default');
     }
 }
 
-if (! function_exists('notificationEnabled')) {
+if (! function_exists('notification_enabled')) {
     /**
      * Get Notification Enable Status.
      */
-    function notificationEnabled()
+    function notification_enabled()
     {
         return config('notification.enabled');
     }
 }
 
-if (! function_exists('simpleNotify')) {
-    function simpleNotify(App\Models\User $user, $subject, $message, $url = null)
+if (! function_exists('notify')) {
+    function notify(App\Models\User $user, $subject, $message, $url = null)
     {
         $user->notify(
             new \App\Notifications\DefaultNotification($subject, $message, $url)

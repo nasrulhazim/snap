@@ -2,9 +2,9 @@
 
 @php
     $options = array_merge([
-                    'enableTime' => false,
-                    'defaultDate' => "today"
-                    ], $options);
+                'enableTime' => false,
+                'defaultDate' => "today"
+            ], $options);
 @endphp
 
 <div class="w-full mb-7 md:flex md:space-x-8">
@@ -22,7 +22,7 @@
             name="{{ $name }}"
             {!! $attributes->merge(['class' => 'flatpickr h-10 border-gray-300 focus:border-primary-500 focus:ring focus:ring-primary-400 focus:ring-opacity-50 rounded text-sm shadow-xs block w-full disabled:bg-gray-50 disabled:cursor-not-allowed']) !!}
             data-input>
-            <x-icon name="chevron-down" class="absolute text-gray-600 my-auto inset-y-0 right-3 w-4 h-4"></x-icon>
+            <x-icon name="chevron-down" class="absolute text-gray-600 top-3 right-3 w-4 h-4"></x-icon>
         <x-form.error :name="$name"></x-form.error>
     </div>
 </div>

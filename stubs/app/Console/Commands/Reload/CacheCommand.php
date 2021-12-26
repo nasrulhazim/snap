@@ -35,6 +35,9 @@ class CacheCommand extends Command
      */
     public function handle()
     {
+        if (file_exists(config('livewire-domain.manifest_path'))) {
+            unlink(config('livewire-domain.manifest_path'));
+        }
         $this->call('event:clear');
         $this->call('optimize:clear');
         $this->call('route:clear');

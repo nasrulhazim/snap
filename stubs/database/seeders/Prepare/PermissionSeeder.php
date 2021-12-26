@@ -20,25 +20,26 @@ class PermissionSeeder extends Seeder
 
     private function seedRoles()
     {
-        $roles = collect(\App\Models\Role::DEFAULT_ROLES)->transform(function ($role) {
-            return ['name' => $role, 'guard_name' => 'web'];
+        collect(config('access-matrix.roles'))->each(function ($role) {
+            Role::updateOrCreate(['name' => $role, 'guard_name' => 'web']);
         });
-
-        Role::insert($roles->all());
     }
 
     private function seedPermissions()
     {
-        $permissions = collect(\App\Models\Permission::DEFAULT_PERMISSIONS);
+        $permissions = collect(config('access-matrix.roles_permissions'));
         Role::query()->each(function ($role) use ($permissions) {
-            $permissions->each(function ($permission) use ($role) {
+            $permissions->each(function ($roles, $permission) use ($role) {
                 $permission = \Spatie\Permission\Models\Permission::updateOrCreate([
-                    'name' => $permission.' '.$role->name,
-                    'guard_name' => $role->guard_name,
+                    'name' => $permission,
+                    'guard_name' => 'web',
                 ]);
-
-                if ($role && ! $role->hasPermissionTo($permission)) {
-                    $role->givePermissionTo($permission);
+                foreach ($roles as $role_permission) {
+                    if ($role->name == $role_permission) {
+                        if ($role && ! $role->hasPermissionTo($permission)) {
+                            $role->givePermissionTo($permission);
+                        }
+                    }
                 }
             });
         });

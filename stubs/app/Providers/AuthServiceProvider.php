@@ -2,19 +2,17 @@
 
 namespace App\Providers;
 
-use App\Policies\AuthenticationLogPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Yadahan\AuthenticationLog\AuthenticationLog;
 
 class AuthServiceProvider extends ServiceProvider
 {
     /**
      * The policy mappings for the application.
      *
-     * @var array
+     * @var array<class-string, class-string>
      */
     protected $policies = [
-        AuthenticationLog::class => AuthenticationLogPolicy::class,
+        // 'App\Models\Model' => 'App\Policies\ModelPolicy',
     ];
 
     /**

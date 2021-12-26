@@ -1,12 +1,11 @@
 @unless ($breadcrumbs->isEmpty())
-    <ol class="flex flex-nowrap overflow-x-scroll w-full items-center space-x-3 font-medium text-xs md:ml-6 whitespace-nowrap no-scrollbar">
+    <ol class="flex flex-nowrap w-full items-center space-x-3 font-medium text-xs md:ml-6 whitespace-nowrap no-scrollbar">
         @foreach ($breadcrumbs as $breadcrumb)
-            @if (!is_null($breadcrumb->url) && !$loop->last)
-                <li class="text-black md:text-white text-opacity-60 hover:text-opacity-100">
-                    <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a>
-                </li>
+            @if (!is_null($breadcrumb->url) && !$loop->last) <li
+             class="text-black md:text-gray-400 text-opacity-60
+             hover:text-opacity-100"> <a href="{{ $breadcrumb->url }}">{{ $breadcrumb->title }}</a> </li>
             @else
-                <li class="text-black md:text-white text-opacity-100 md:text-opacity-70">{{ $breadcrumb->title }}</li>
+                <li class="text-malaya-blue">{{ $breadcrumb->title }}</li>
             @endif
 
             @if(!$loop->last)

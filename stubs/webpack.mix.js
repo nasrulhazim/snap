@@ -1,5 +1,7 @@
-const mix = require('laravel-mix');
+const mix = require("laravel-mix");
 
+// let publicImagePath = path.join(__dirname, "public/img");
+// let iconPublicPath = path.join(__dirname, "public/icon");
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,21 +13,28 @@ const mix = require('laravel-mix');
  |
  */
 
+// Default
 mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
+        require("autoprefixer"),
         require('postcss-import'),
         require('tailwindcss'),
     ]);
 
-mix.options({
-    postCss: [
-        require("autoprefixer"),
-        require("postcss-import"),
-        require("tailwindcss")("./tailwind.config.js"),
-    ],
-    processCssUrls: false,
-});
+// WIth SASS
+// mix.js("resources/js/app.js", "public/js");
+// mix.extract();
+// mix.sass("resources/sass/app.scss", "public/css");
+// mix.options({
+//     postCss: [
+//         require("autoprefixer"),
+//         require("postcss-import"),
+//         require("tailwindcss")("./tailwind.config.js"),
+//     ],
+//     processCssUrls: false,
+// });
 
 if (mix.inProduction()) {
     mix.version();
 }
+

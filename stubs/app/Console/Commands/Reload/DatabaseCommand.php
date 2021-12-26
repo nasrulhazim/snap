@@ -3,8 +3,6 @@
 namespace App\Console\Commands\Reload;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Schema;
 
 class DatabaseCommand extends Command
 {
@@ -46,7 +44,7 @@ class DatabaseCommand extends Command
         }
         $this->call('migrate:fresh', ['--quiet' => true]);
         $this->call('seed:prepare', ['--quiet' => true]);
-        
+
         if ($this->option('demo')) {
             $this->call('seed:demo');
         }

@@ -37,7 +37,7 @@ class PrepareCommand extends Command
     {
         $this->call('db:seed', [
             '--class' => '\Database\Seeders\Prepare\PreSeeder',
-            '--quiet' => true
+            '--quiet' => true,
         ]);
     }
 }

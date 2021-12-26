@@ -1,4 +1,4 @@
-@props(['name', 'label', 'description' => false, 'disabled' => false])
+@props(['name', 'label', 'description' => false, 'disabled' => false, 'inputWidth' => 'md:w-4/6'])
 
 @php
     $class = 'w-full h-10 border-gray-300 focus:border-primary-500 focus:ring focus:ring-primary-400 focus:ring-opacity-50 rounded text-sm shadow-xs block w-full disabled:bg-gray-50 disabled:cursor-not-allowed ';
@@ -10,7 +10,7 @@
         <x-form.label name="{{ $name }}">{{ $label }}</x-form.label>
     @endif
     
-    <div class="md:w-4/6">
+    <div class="{{ $inputWidth }}">
         <input {{ $disabled ? 'disabled' : '' }} 
             type="{{ $attributes->get('type') ?? 'text' }}" 
             name="{{ $name }}"
