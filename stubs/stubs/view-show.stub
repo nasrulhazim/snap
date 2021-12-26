@@ -5,9 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="max-w mx-auto">
-        <x-panel>
+    <x-panel>
 
-        </x-panel>
-    </div>
+    </x-panel>
 </x-app-layout>

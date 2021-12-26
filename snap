@@ -38,6 +38,7 @@ function createProject()
     display "Installing packages..."
     composer require \
     blade-ui-kit/blade-icons \
+    blade-ui-kit/blade-heroicons \
     cleaniquecoders/laravel-observers \
     cleaniquecoders/laravel-uuid \
     diglactic/laravel-breadcrumbs \
@@ -64,6 +65,11 @@ function createProject()
     spatie/laravel-ray \
     friendsofphp/php-cs-fixer \
     --quiet --no-ansi --no-interaction --dev
+    commit "Added development packages"
+
+    display "Installing Pest"
+    composer require pestphp/pest --dev --with-all-dependencies
+    composer require pestphp/pest-plugin-laravel --dev
     commit "Added development packages"
 
     display "Installing frontend packages..."

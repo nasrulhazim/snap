@@ -9,7 +9,7 @@
             @endif
 
             @if(!$loop->last)
-                <x-icon name="chevron-right" class="w-4 h-4 text-gray-400 flex-shrink-0"></x-icon>
+                <x-icon name="o-chevron-right" class="w-4 h-4 text-gray-400 flex-shrink-0"></x-icon>
             @endif
         @endforeach
     </ol>

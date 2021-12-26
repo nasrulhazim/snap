@@ -8,7 +8,7 @@
                         {{ substr(Auth::user()->name, 0, 2) }}
                     </div>
                     {{-- <h4 class="hidden md:inline-block">{{ Auth::user()->name }}</h4> --}}
-                    <x-icon name="chevron-down" class="ml-2 h-4 w-4 text-malaya-blue"></x-icon>
+                    <x-icon name="o-chevron-down" class="ml-2 h-4 w-4 text-malaya-blue"></x-icon>
                 </button>
             </span>
         </x-slot>
@@ -29,7 +29,7 @@
                 <x-jet-dropdown-link
                     class="flex items-center py-2 px-3 rounded-full group hover:text-primary-500 hover:bg-primary-50"
                     href="{{ route('profile.show') }}">
-                    <x-icon name="user" class="text-gray-500 w-5 h-5 group-hover:text-primary-500">
+                    <x-icon name="o-user" class="text-gray-500 w-5 h-5 group-hover:text-primary-500">
                     </x-icon>
                     <span class="font-medium ml-4">{{ __('Profile') }}</span>
                 </x-jet-dropdown-link>
@@ -44,7 +44,7 @@
                         class="flex items-center py-2 px-3 rounded-full group hover:text-red-500 hover:bg-red-50"
                         href="{{ route('logout') }}" :default="false" onclick="event.preventDefault();
                                     this.closest('form').submit();">
-                        <x-icon name="logout" class="text-red-500 w-5 h-5 group-hover:text-red-500">
+                        <x-icon name="o-logout" class="text-red-500 w-5 h-5 group-hover:text-red-500">
                         </x-icon>
                         <span class="font-medium ml-4 text-red-500">{{ __('Log Out') }}</span>
                     </x-jet-dropdown-link>

@@ -6,7 +6,7 @@
         <x-slot name="trigger" class="text-right">
             <button type="button" class="border rounded text-sm px-4 py-1.5 text-center inline-flex items-center space-x-2 bg-white hover:bg-gray-50 focus:outline-none transition">
                 <span>{{ __('Action') }}</span>
-                <x-icon name="chevron-down" class="w-4 h-4"></x-icon>
+                <x-icon name="o-chevron-down" class="w-4 h-4"></x-icon>
             </button>
         </x-slot>
 

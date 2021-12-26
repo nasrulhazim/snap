@@ -5,7 +5,7 @@
         <div class="bg-blue-50 border border-blue-500 shadow-md rounded-lg py-2.5 px-4 flex items-center"
             x-show="showToastr">
             <div class="bg-blue-100 h-8 w-8 rounded-full inline-flex items-center justify-center mr-3">
-                <x-icon name="alert-circle" class="text-blue-500"></x-icon>
+                <x-icon name="o-exclamation" class="text-blue-500"></x-icon>
             </div>
             <span>{{ session('message') }}</span>
             <x-icon x-on:click="showToastr = false" name="x"

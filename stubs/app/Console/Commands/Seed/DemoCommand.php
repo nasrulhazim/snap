@@ -36,7 +36,7 @@ class DemoCommand extends Command
     public function handle()
     {
         $this->call('db:seed', [
-            '--class' => '\Database\Seeders\DemoSeeder',
+            '--class' => '\Database\Seeders\Demo\DemoSeeder',
             '--quiet' => true,
         ]);
     }

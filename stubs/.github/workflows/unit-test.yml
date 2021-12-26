@@ -2,7 +2,7 @@ name: Unit Test
 on: [push, pull_request]
 jobs:
   unit-test:
-    name: Arc8 (PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }})
+    name: PHP ${{ matrix.php-versions }} on ${{ matrix.operating-system }}
     runs-on: ${{ matrix.operating-system }}
     strategy:
       fail-fast: false
@@ -32,7 +32,7 @@ jobs:
       - name: Install Composer dependencies
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
       - name: Test with phpunit
-        run: php artisan config:clear -q && vendor/bin/phpunit --stop-on-failure --stop-on-error
+        run: php artisan config:clear -q && vendor/bin/pest --stop-on-failure --stop-on-error
         env:
           DB_CONNECTION: sqlite
           DB_DATABASE: ":memory:"

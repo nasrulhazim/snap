@@ -9,7 +9,7 @@ if (! function_exists('color_variant')) {
             case 'info':
             case 'blue':
             case 'primary':
-                $class = 'bg-primary-1000 text-primary-50 border-primary-600';
+                $class = 'bg-gray-50 text-gray-700 border-gray-500 border';
 
                 break;
             case 'success':

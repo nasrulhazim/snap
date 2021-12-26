@@ -1,7 +1,7 @@
 <div x-data="sidebar" x-init="init" x-on:resize.window="onResize">
     <button class="fixed top-0 z-50 p-4 md:hidden inline-flex items-center" x-on:click="show = !show">
-        <x-icon name="menu-2" class="text-primary text-opacity-80" x-show="!show" x-cloak></x-icon>
-        <x-icon name="x" class="text-primary text-opacity-80" x-show="show" x-cloak></x-icon>
+        <x-icon name="o-menu-2" class="text-primary text-opacity-80" x-show="!show" x-cloak></x-icon>
+        <x-icon name="o-x" class="text-primary text-opacity-80" x-show="show" x-cloak></x-icon>
         <span class="text-primary text-opacity-80 ml-2 text-sm">{{ __('Menu') }}</span>
     </button>
     
