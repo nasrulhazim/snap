@@ -50,19 +50,20 @@ class ScreenCommand extends Command
             '--resource' => true,
         ]);
         $this->call('make:view', [
-                '--all' => true,
-            ]);
+            'name' => $this->getNameInput(),
+            '--all' => true,
+        ]);
         $this->call('make:route', [
-                'name' => $this->getNameInput(),
-                '--resource' => '\App\Http\Controllers\\'.$this->getNameInput().'Controller',
-            ]);
+            'name' => $this->getNameInput(),
+            '--resource' => '\App\Http\Controllers\\'.$this->getNameInput().'Controller',
+        ]);
         $this->call('make:breadcrumb', [
             'name' => $this->getNameInput(),
             '--resource' => true,
         ]);
         $this->call('make:datatable', [
-                'name' => $this->getNameInput().'Datatable',
-            ]);
+            'name' => $this->getNameInput().'Datatable',
+        ]);
         $this->call('make:screen-test', [
             'name' => $this->getNameInput() . 'Screen',
         ]);
