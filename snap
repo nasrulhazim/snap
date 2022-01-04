@@ -31,10 +31,6 @@ function createProject()
     cp .env .env.example
     commit "Update .env.example"
 
-    display "Updating README.md..."
-    sed "s/YOUR_APP/${NAME}/g" $SNAP_PATH/stubs/README.md > README.md
-    commit "Update README.md"
-
     display "Installing packages..."
     composer require \
     blade-ui-kit/blade-icons \
@@ -92,6 +88,10 @@ function createProject()
     # Need to copy the stubs from snap/stubs absolute directory to  project directory
     cp -R $SNAP_PATH/stubs/ .
     commit "Copied stubs"
+
+    display "Updating README.md..."
+    sed "s/YOUR_APP/${NAME}/g" $SNAP_PATH/stubs/README.md > README.md
+    commit "Update README.md"
 
     display "Setting up helpers..."
     php $SNAP_PATH/configure.php composer.json
